@@ -1,33 +1,31 @@
 <template>
   <div>
-    <p>{{ t('hello') }}</p>
-    <p>{{ t('message') }}</p>
+    <div v-bind="getRootProps()">
+      <input v-bind="getInputProps()" >
+      <p v-if="isDragActive">Drop the files here ...</p>
+      <p v-else>Drag 'n' drop some files here, or click to select files</p>
+    </div>
+    <button @click="open">open</button>
   </div>
 </template>
 
 <script>
-// import { defineComponent } from 'vue'
-import { useI18n } from 'vue-i18n'
-
-export default ({
-  name: 'HelloI18n',
+import { useDropzone } from 'vue3-dropzone'
+export default {
+  name: 'UseDropzoneDemo',
   setup() {
-    const { t } = useI18n({
-      inheritLocale: true,
-      useScope: 'local'
-    })
+    function onDrop(acceptFiles, rejectReasons) {
+      console.log(acceptFiles)
+      console.log(rejectReasons)
+    }
 
-    // Something todo ..
+    const { getRootProps, getInputProps, ...rest } = useDropzone({ maxSize: 1, onDrop })
 
-    return { t }
-  }
-})
-</script>
-
-<i18n>
-{
-  "en": {
-    "hello": "Hello i18n in SFC!"
+    return {
+      getRootProps,
+      getInputProps,
+      ...rest
+    }
   }
 }
-</i18n>
+</script>

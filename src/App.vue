@@ -1,15 +1,15 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloI18n/>
+  <Articles/>
 </template>
 
 <script>
-import HelloI18n from './components/HelloI18n'
+import Articles from "./components/Articles";
 
 export default {
   name: 'App',
   components: {
-    HelloI18n
+    Articles
   }
 }
 </script>
